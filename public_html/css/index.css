@@ -18,3 +18,27 @@ body{
     width: 600px;
     height: 300px;
 }
+
+div.chart {
+    font-size: 18px;
+}
+
+div.label1 {
+    height: 25px;
+    line-height: 2 px;
+    padding-right: 5px;
+    margin-bottom: 2px;
+    display: inline-block;
+    width: 75px;
+    text-align: right;
+}
+div.bar {
+    background-color: green;
+    color: orange;
+    height: 5px;
+    line-height: 2px;
+    padding-right: 3px;
+    text-align: right;
+    margin-left: 14px;
+    display: inline-block;
+}

@@ -29,6 +29,9 @@
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <script>google.charts.load('current', {'packages':['corechart']});</script>
         
+        <!--D3-->
+        <script src="https://d3js.org/d3.v4.js"></script>
+        
         
  <script>
    var kpi1Data = [[[1,2.1],[2,2.75],[3,5.6],[4,4.9]]];
@@ -351,8 +354,46 @@ function drawGoogleChart() {
     var chart3 = new google.visualization.BarChart(document.getElementById('kpi4'));
     chart3.draw(data3);
 }
-function d3(){}
-function leaflet(){}
+
+
+function drawD3(){
+    d3.json("http://localhost/VisualizationData/index.php", function (error, data){
+        
+        if (error) {
+            alert("An Error Has Occured");
+            return;
+        }
+        
+        var dataset = data;
+        
+        d3.select("#kpi1")
+            .append("div").attr("class", "chart")
+            .selectAll("div.bar")
+            .data(dataset)
+            .enter()
+            .append("div").attr("class", "line");
+            
+            d3.selectAll("div.line")
+                .append("div")
+                .attr("class", "label1")
+                .text(function (d) {
+                return d.label
+    });
+    
+    d3.selectAll("div.line")
+    .append("div")
+    .attr("class", "bar")
+    .style("width", function (d) {
+        return d.size * 10 + "px";
+        })
+        .text(function (d) {
+            return d.size;
+            });
+        });
+            }
+
+
+
 
 
      
@@ -379,7 +420,7 @@ function leaflet(){}
       <li class="nav-item"><a onclick="chartjs()">Chart</a></li>
       <li class="nav-item"><a onclick="chartist()">Chartist</a></li>
       <li class="nav-item"><a onclick="googleCharts()">Google Charts</a></li>
-      <li class="nav-item"><a onclick="d3()">D3</a></li>
+      <li class="nav-item"><a onclick="drawD3()">D3</a></li>
       <li class="nav-item"><a onclick="leaflet()">Leaflet</a></li>
       </div>
     </nav>
